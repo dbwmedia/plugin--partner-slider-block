@@ -1,0 +1,14 @@
+{
+	"name": "dbw-partner-slider",
+	"version": "1.0.0",
+	"description": "Ein Gutenberg-Block für einen Infinity-Partner-Slider mit anpassbarer Geschwindigkeit (dbw).",
+	"author": "dbw media",
+	"license": "ISC",
+	"scripts": {
+		"build": "wp-scripts build",
+		"start": "wp-scripts start"
+	},
+	"devDependencies": {
+		"@wordpress/scripts": "^24.3.0"
+	}
+}

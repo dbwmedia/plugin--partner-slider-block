@@ -1,0 +1,39 @@
+.dbw-partner-slider-editor-wrapper {
+	border: 1px solid #ccc;
+	padding: 20px;
+	background: #f9f9f9;
+}
+
+.dbw-partner-slider-editor {
+	.dbw-partner-slider-images {
+		display: flex;
+		flex-wrap: wrap;
+		gap: 15px;
+		margin-bottom: 20px;
+
+		.dbw-partner-slider-image {
+			background: #fff;
+			border: 1px solid #ddd;
+			padding: 10px;
+			display: flex;
+			flex-direction: column;
+			align-items: center;
+			justify-content: center;
+
+			img {
+				display: block;
+				max-height: 50px;
+				margin-bottom: 10px;
+			}
+
+			.dbw-remove-button {
+				color: #b32d2e;
+				font-size: 12px;
+			}
+		}
+	}
+
+	.components-button {
+		margin-top: 10px;
+	}
+}
