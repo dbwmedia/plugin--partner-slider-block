@@ -5,11 +5,3 @@ build/
 # Betriebssystem-spezifische Dateien
 .DS_Store
 Thumbs.db
-
-# Log-Dateien
-npm-debug.log*
-yarn-error.log
-
-# IDE / Editor-spezifische Verzeichnisse
-.vscode/
-.idea/
