@@ -1,4 +1,4 @@
-### DBW Partner Slider Block
+### dbw Partner Slider Block
 
 Contributors: dbw media
 Tags: partner, slider, infinity, logos, dbw
@@ -10,7 +10,7 @@ License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
 ## Beschreibung
 
-Der **DBW Partner Slider Block** ist ein maßgeschneiderter Gutenberg-Block, der das Branding Ihrer Partner auf ansprechende und dynamische Weise präsentiert. Die Logos scrollen unendlich, lassen sich in ihrer Geschwindigkeit und dem Abstand anpassen und stoppen auf Maus-Hover. Das Plugin wird von **dbw media** entwickelt, einer Full-Service-Digitalagentur, die auf individuelle WordPress-Lösungen, hochwertige Webentwicklung und stimmiges Design spezialisiert ist.
+Der **dbw Partner Slider Block** ist ein maßgeschneiderter Gutenberg-Block, der das Branding Ihrer Partner auf ansprechende und dynamische Weise präsentiert. Die Logos scrollen unendlich, lassen sich in ihrer Geschwindigkeit und dem Abstand anpassen und stoppen auf Maus-Hover. Das Plugin wird von **dbw media** entwickelt, einer Full-Service-Digitalagentur, die auf individuelle WordPress-Lösungen, hochwertige Webentwicklung und stimmiges Design spezialisiert ist.
 
 ## Funktionen
 
