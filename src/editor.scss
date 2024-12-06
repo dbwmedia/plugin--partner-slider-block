@@ -19,6 +19,7 @@
 			flex-direction: column;
 			align-items: center;
 			justify-content: center;
+			min-width: 120px;
 
 			img {
 				display: block;
@@ -27,8 +28,13 @@
 			}
 
 			.dbw-remove-button {
+				margin-top: 10px;
 				color: #b32d2e;
 				font-size: 12px;
+			}
+
+			.components-base-control__field {
+				width: 100%;
 			}
 		}
 	}

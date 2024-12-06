@@ -1,6 +1,11 @@
 import { registerBlockType } from "@wordpress/blocks";
 import { InspectorControls, MediaUpload } from "@wordpress/block-editor";
-import { PanelBody, Button, SelectControl } from "@wordpress/components";
+import {
+	PanelBody,
+	Button,
+	SelectControl,
+	TextControl,
+} from "@wordpress/components";
 import { __ } from "@wordpress/i18n";
 import "./editor.scss";
 import "./style.scss";
@@ -8,7 +13,7 @@ import "./style.scss";
 registerBlockType("dbw-partner-slider-block/slider", {
 	title: __("DBW Partner Slider", "dbw-partner-slider-block"),
 	description: __(
-		"Ein Infinity-Slider für Partner-Logos (dbw), mit anpassbarer Geschwindigkeit, Abstand und Hover-Stop.",
+		"Ein Infinity-Slider für Partner-Logos (dbw), mit anpassbarer Geschwindigkeit, Abstand, Hover-Stop und optionalen Links.",
 		"dbw-partner-slider-block"
 	),
 	icon: "images-alt2",
@@ -24,24 +29,34 @@ registerBlockType("dbw-partner-slider-block/slider", {
 		},
 		gap: {
 			type: "string",
-			default: "medium", // Optionen: small, medium, large
+			default: "medium", // small, medium, large
+		},
+		marginSize: {
+			type: "string",
+			default: "medium", // small=25px, medium=50px, large=75px
 		},
 	},
 	edit: ({ attributes, setAttributes }) => {
-		const { images, speed, gap } = attributes;
+		const { images, speed, gap, marginSize } = attributes;
 
 		const addImage = (selection) => {
 			const selectedImages = Array.isArray(selection) ? selection : [selection];
 			const newImages = selectedImages.map((img) => {
 				const imageUrl =
 					img.url || img.sizes?.full?.url || img.source_url || "";
-				return { id: img.id, url: imageUrl };
+				return { id: img.id, url: imageUrl, link: "" };
 			});
 			setAttributes({ images: [...images, ...newImages] });
 		};
 
 		const removeImage = (index) => {
 			const updated = images.filter((_, i) => i !== index);
+			setAttributes({ images: updated });
+		};
+
+		const updateImageLink = (linkValue, index) => {
+			const updated = [...images];
+			updated[index].link = linkValue;
 			setAttributes({ images: updated });
 		};
 
@@ -104,6 +119,33 @@ registerBlockType("dbw-partner-slider-block/slider", {
 							onChange={(newGap) => setAttributes({ gap: newGap })}
 						/>
 					</PanelBody>
+					<PanelBody
+						title={__(
+							"Außenabstand (Margin) oben/unten",
+							"dbw-partner-slider-block"
+						)}
+						initialOpen={false}
+					>
+						<SelectControl
+							label={__("Margin oben/unten", "dbw-partner-slider-block")}
+							value={marginSize}
+							options={[
+								{
+									label: __("Klein (25px)", "dbw-partner-slider-block"),
+									value: "small",
+								},
+								{
+									label: __("Mittel (50px)", "dbw-partner-slider-block"),
+									value: "medium",
+								},
+								{
+									label: __("Groß (75px)", "dbw-partner-slider-block"),
+									value: "large",
+								},
+							]}
+							onChange={(newMargin) => setAttributes({ marginSize: newMargin })}
+						/>
+					</PanelBody>
 				</InspectorControls>
 
 				<div className="dbw-partner-slider-editor">
@@ -116,6 +158,11 @@ registerBlockType("dbw-partner-slider-block/slider", {
 										alt={__("Partner Logo", "dbw-partner-slider-block")}
 									/>
 								)}
+								<TextControl
+									label={__("Logo-Link (optional)", "dbw-partner-slider-block")}
+									value={image.link || ""}
+									onChange={(val) => updateImageLink(val, index)}
+								/>
 								<Button
 									isDestructive
 									variant="secondary"
@@ -142,7 +189,7 @@ registerBlockType("dbw-partner-slider-block/slider", {
 		);
 	},
 	save: ({ attributes }) => {
-		const { images, speed, gap } = attributes;
+		const { images, speed, gap, marginSize } = attributes;
 
 		const speedMap = {
 			slow: "30s",
@@ -158,32 +205,70 @@ registerBlockType("dbw-partner-slider-block/slider", {
 		};
 		const gapValue = gapMap[gap] || "10px";
 
+		const marginMap = {
+			small: "25px",
+			medium: "50px",
+			large: "75px",
+		};
+		const marginValue = marginMap[marginSize] || "50px";
+
 		return (
 			<div
 				className="dbw-partner-slider"
-				style={{ "--scroll-duration": duration, "--slide-gap": gapValue }}
+				style={{
+					"--scroll-duration": duration,
+					"--slide-gap": gapValue,
+					"--outer-margin": marginValue,
+				}}
 			>
 				<div className="dbw-slider-track">
-					{images.map((image, index) => (
-						<div key={index} className="dbw-slider-item">
-							{image.url && (
-								<img
-									src={image.url}
-									alt={__("Partner Logo", "dbw-partner-slider-block")}
-								/>
-							)}
-						</div>
-					))}
-					{images.map((image, index) => (
-						<div key={"dup-" + index} className="dbw-slider-item">
-							{image.url && (
-								<img
-									src={image.url}
-									alt={__("Partner Logo", "dbw-partner-slider-block")}
-								/>
-							)}
-						</div>
-					))}
+					{images.map((image, index) => {
+						const imgElement = (
+							<img
+								src={image.url}
+								alt={__("Partner Logo", "dbw-partner-slider-block")}
+							/>
+						);
+
+						return (
+							<div key={index} className="dbw-slider-item">
+								{image.link ? (
+									<a
+										href={image.link}
+										target="_blank"
+										rel="noopener noreferrer"
+									>
+										{imgElement}
+									</a>
+								) : (
+									imgElement
+								)}
+							</div>
+						);
+					})}
+					{images.map((image, index) => {
+						const imgElement = (
+							<img
+								src={image.url}
+								alt={__("Partner Logo", "dbw-partner-slider-block")}
+							/>
+						);
+						return (
+							<div key={"dup-" + index} className="dbw-slider-item">
+								{image.link ? (
+									<a
+										href={image.link}
+										target="_blank"
+										rel="noopener noreferrer"
+									>
+										{imgElement}
+									</a>
+								) : (
+									imgElement
+								)}
+							</div>
+						);
+					})}
 				</div>
 			</div>
 		);

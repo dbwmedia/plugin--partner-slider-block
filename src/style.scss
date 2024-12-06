@@ -2,6 +2,8 @@
 	position: relative;
 	overflow: hidden;
 	width: 100%;
+	margin-top: var(--outer-margin, 50px);
+	margin-bottom: var(--outer-margin, 50px);
 
 	&::before,
 	&::after {
@@ -46,6 +48,10 @@
 		display: block;
 		max-height: 50px;
 		width: auto;
+	}
+
+	a {
+		display: inline-block;
 	}
 }
 
