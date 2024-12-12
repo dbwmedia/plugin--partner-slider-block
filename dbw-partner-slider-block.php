@@ -1,6 +1,6 @@
 <?php
 /**
- * Plugin Name: DBW Partner Slider Block
+ * Plugin Name: dbw Partner Slider Block
  * Description: Ein Gutenberg-Block für einen Infinity-Partner-Slider mit anpassbarer Geschwindigkeit, Abstand, Hover-Stop und optionalen Logo-Links, entwickelt von dbw media.
  * Version: 1.0.0
  * Author: dbw media
