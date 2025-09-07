@@ -1,12 +1,31 @@
 {
-	"name": "dbw-partner-slider",
+	"name": "logo-slider-block",
 	"version": "1.0.0",
-	"description": "Ein Gutenberg-Block für einen Infinity-Partner-Slider mit anpassbarer Geschwindigkeit (dbw).",
-	"author": "dbw media",
-	"license": "ISC",
+	"description": "Professional infinity logo slider Gutenberg block with customizable speed, spacing and hover-pause.",
+	"author": "dbw media <hallo@dbw-media.de>",
+	"homepage": "https://wordpress.org/plugins/logo-slider-block/",
+	"license": "GPL-2.0-or-later",
+	"keywords": [
+		"wordpress",
+		"gutenberg",
+		"block",
+		"slider",
+		"logo",
+		"carousel",
+		"infinite-scroll",
+		"client-logos",
+		"partner-logos"
+	],
+	"repository": {
+		"type": "git",
+		"url": "https://github.com/dbw-media/logo-slider-block"
+	},
 	"scripts": {
 		"build": "wp-scripts build",
-		"start": "wp-scripts start"
+		"start": "wp-scripts start",
+		"lint:js": "wp-scripts lint-js",
+		"format": "wp-scripts format",
+		"packages-update": "wp-scripts packages-update"
 	},
 	"devDependencies": {
 		"@wordpress/scripts": "^24.3.0"
